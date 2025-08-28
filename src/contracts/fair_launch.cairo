@@ -110,9 +110,7 @@ pub mod FairLaunch {
         fn before_swap(ref self: ContractState, 
             caller: ContractAddress, 
             pool_key: PoolKey, 
-            params: SwapParameters) {
-            panic!("Only from internal_swap_pool");
-        }
+            params: SwapParameters) {}
         fn after_swap(ref self: ContractState, 
             caller: ContractAddress, 
             pool_key: PoolKey, 
@@ -140,18 +138,6 @@ pub mod FairLaunch {
             delta: Delta) {}
     }
 
-    // Core ISP logic - handles forwarded calls from router
-    #[abi(embed_v0)]
-    impl ForwardeeImpl of IForwardee<ContractState> {
-        fn forwarded(
-            ref self: ContractState,
-            original_locker: ContractAddress,
-            id: u32,
-            data: Span<felt252>
-        ) -> Span<felt252> {
-
-        }
-    }
 }
 
 
