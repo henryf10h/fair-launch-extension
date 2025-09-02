@@ -19,15 +19,14 @@ use ekubo::types::i129::{i129};
 
     // Swap argument for multi multi-hop swaps
     // After single swap works well change to: pub route: Array<RouteNode>
-    #[derive(Serde, Drop)]
+    #[derive(Serde, Copy, Drop)]
     pub struct Swap {
         pub route: RouteNode,
         pub token_amount: TokenAmount,
     }
     
-    // Interface for ISP Router
     #[starknet::interface]
-    pub trait IISPRouter<TContractState> {
+    pub trait IRouter<TContractState> {
         fn swap( 
             ref self: TContractState, 
             swap_data: Swap

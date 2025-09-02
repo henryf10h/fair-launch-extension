@@ -22,7 +22,7 @@ pub mod FairLaunch {
     use ekubo::components::clear::{ClearImpl};
     use ekubo::components::owned::{Owned as owned_component};
     use ekubo::components::shared_locker::{consume_callback_data};
-    use ekubo::components::upgradeable::{Upgradeable as upgradeable_component};
+    use ekubo::components::upgradeable::{Upgradeable as upgradeable_component, IHasInterface};
 
     #[abi(embed_v0)]
     impl Clear = ekubo::components::clear::ClearImpl<ContractState>;
@@ -55,8 +55,6 @@ pub mod FairLaunch {
         native_token: ContractAddress,
     ) {
         self.initialize_owned(owner);
-        
-        // Set ISP fields directly
         self.native_token.write(native_token);
         self.core.write(core);
         self.fee_percentage.write(30); // 0.3%
@@ -94,6 +92,14 @@ pub mod FairLaunch {
         UpgradeableEvent: upgradeable_component::Event,
         #[flat]
         OwnedEvent: owned_component::Event,
+    }
+
+    // Implement IHasInterface for contract identification
+    #[abi(embed_v0)]
+    impl InternalSwapPoolHasInterface of IHasInterface<ContractState> {
+        fn get_primary_interface_id(self: @ContractState) -> felt252 {
+            selector!("fairlaunch::contracts::fair_launch::FairLaunch")
+        }
     }
 
     // Minimal extension implementation

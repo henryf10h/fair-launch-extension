@@ -22,7 +22,7 @@ pub mod ISPRouter {
     };
     use starknet::{get_contract_address, ContractAddress};
     use starknet::storage::{StoragePointerWriteAccess, StoragePointerReadAccess};
-    use fairlaunch::interfaces::Irouter::{IISPRouter};
+    use fairlaunch::interfaces::Irouter::{IRouter};
     use fairlaunch::interfaces::Irouter::{Swap};
 
     #[abi(embed_v0)]
@@ -83,7 +83,7 @@ pub mod ISPRouter {
     }
 
     #[abi(embed_v0)]
-    impl ISPRouterImpl of IISPRouter<ContractState> {
+    impl ISPRouterImpl of IRouter<ContractState> {
 
         /// Main swap function - uses lock-forward pattern for ISP
         fn swap( ref self: ContractState, swap_data: Swap) -> Delta {
