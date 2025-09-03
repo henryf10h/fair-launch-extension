@@ -1,3 +1,4 @@
 target
 .vscode
 .github
+.snfoundry_cache

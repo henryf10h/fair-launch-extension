@@ -94,14 +94,14 @@ fn test_single_tick_swap_multiple_accounts() {
     positions().mint_and_deposit_and_clear_both(
         pool_key,
         Bounds {
-            lower: i129 { mag: 10050, sign: true },
+            lower: i129 { mag: 60000, sign: true },
             upper: i129 { mag: 0, sign: false }
         },
         0
     );
     
     // Prepare swap parameters
-    let amount_in: u128 = 400000;
+    let amount_in: u128 = 400_000;
     let token_amount = TokenAmount {
         token: pool_key.token0,
         amount: i129 { mag: amount_in, sign: false }, // Exact input (positive)
